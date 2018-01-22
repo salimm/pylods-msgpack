@@ -77,16 +77,16 @@ class MsgPackDictionary(Dictionary):
     ######################### OBJECT
     
     def write_object_start(self, numfields, outstream):
-        self.write_object_start(numfields, outstream)
+        self.write_dict_start(numfields, outstream)
 
     def write_object_end(self, numfields, outstream):
-        self.write_object_end(numfields, outstream)
+        self.write_dict_end(numfields, outstream)
     
     def write_object_field_separator(self, name, value, outstream):
-        self.write_object_field_separator(name, value, outstream)
+        self.write_dict_field_separator(name, value, outstream)
     
     def write_object_field_name(self, name, outstream):
-        self.write_object_field_name(name, outstream)
+        self.write_dict_field_name(name, outstream)
     
     def write_object_name_value_separator(self, name, value, outstream):
         self.write_dict_name_value_separator(name, value, outstream)
