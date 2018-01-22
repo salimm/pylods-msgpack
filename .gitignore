@@ -1,0 +1,10 @@
+/.project
+/.pydevproject
+.settings/
+/.settings/
+*.pyc
+dist
+build
+*.json
+pylods_msgpack.egg-info/
+.git/
