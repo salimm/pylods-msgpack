@@ -11,7 +11,6 @@ import msgpackstream.stream as msgpack
 from msgpackstream.format import EventType, FormatType
 
 import umsgpack
-from _io import BytesIO
 
 
 class MsgPackDictionary(Dictionary):
@@ -27,21 +26,21 @@ class MsgPackDictionary(Dictionary):
             indicates if the given or a tuple representing an start of object event
             :param event:
         '''
-        return event[1] == EventType.MAP_START
+        return event[0] == EventType.MAP_START
     
     def is_obj_end(self, event):
         '''
             indicates if the given or a tuple representing an end of object event
             :param event:
         '''
-        return event[1] == EventType.MAP_END 
+        return event[0] == EventType.MAP_END 
         
     def is_value(self, event):
         '''
             indicates if the given or tuple representing an event that represents a raw value
             :param event:
         '''
-        return event[1] == EventType.VALUE  
+        return event[0] == EventType.VALUE  
         
     def is_obj_property_name(self, event):
         '''
@@ -51,27 +50,27 @@ class MsgPackDictionary(Dictionary):
           
         :param event:
         '''
-        return event[1] == EventType.MAP_PROPERTY_NAME
+        return event[0] == EventType.MAP_PROPERTY_NAME
          
     def is_array_start(self, event):
         '''
             indicates if the given or tuple representing an event that indicates start of an array
             :param event:
         '''
-        return event[1] == EventType.ARRAY_START
+        return event[0] == EventType.ARRAY_START
     
     def is_array_end(self, event):
         '''
             indicates if the given or tuple representing an event that indicates end of an array
             :param event:
         '''
-        return event[1] == EventType.ARRAY_END
+        return event[0] == EventType.ARRAY_END
     
     def read_value(self, event):
         '''
             Returns the value of an msgpack event 
         '''
-        return event[3]
+        return event[2]
     
     
     ######################### OBJECT
