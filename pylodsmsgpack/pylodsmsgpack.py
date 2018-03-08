@@ -7,19 +7,23 @@ from pylods.deserialize import Parser
 from pylods.dict import Dictionary
 from pylods.mapper import ObjectMapper
 from pylods.serialize import DataFormatGenerator
-import msgpackstream.stream as msgpack
-from msgpackstream.format import EventType, FormatType
+import msgpackstream.backend.pyc.stream as msgpackp
 
 import umsgpack
+from msgpackstream.defs import EventType, FormatType
 
 
 class MsgPackDictionary(Dictionary):
+    
+    def __init__(self, msgpack = msgpackp):
+        self.msgpack = msgpack
+        
     
     def gen_events(self, instream):
         '''
             generates events from parsing the input stream
         '''
-        return msgpack.unpack(instream)
+        return self.msgpack.unpack(instream)
     
     def is_obj_start(self, event):
         '''
