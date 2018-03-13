@@ -151,8 +151,8 @@ class MsgPackParser(Parser):
     '''
     
     
-    def __init__(self):
-        Parser.__init__(self, MsgPackDictionary())
+    def __init__(self, pdict= MsgPackDictionary()):
+        Parser.__init__(self, pdict)
         
 
 
@@ -170,8 +170,8 @@ class MsgPackObjectMapper(ObjectMapper):
 class MsgPackGenerator(DataFormatGenerator):
     
     
-    def __init__(self):
-        super(MsgPackGenerator, self).__init__(MsgPackDictionary())
+    def __init__(self, pdict= MsgPackDictionary()):
+        super(MsgPackGenerator, self).__init__(pdict)
         
         
         
