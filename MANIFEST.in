@@ -1,5 +1,5 @@
 include LICENSE.txt
-include pylodsmsgpack/include/MsgpackDictionary.h
+include pylodsmsgpackc/include/MsgpackDictionary.h
 include libs/pylodsc/include/Dictionary.h
 include libs/pylodsc/include/PyDictionary.h
 include libs/pylodsc/include/pylodsc.h
