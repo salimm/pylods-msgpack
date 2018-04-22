@@ -9,7 +9,8 @@ from _io import BytesIO
 from pylods.backend.pylodsc.mapper import CObjectMapper
 from pylods.backend.pylodsp.mapper import PyObjectMapper
 from pylods.decorators import type_attr
-
+import msgpackstream.backend.python.stream as msgpackp
+import msgpackstream.backend.pyc.stream as msgpackc
 
 
 gen = MsgPackGenerator()
@@ -54,7 +55,7 @@ mapper = MsgPackObjectMapper(CObjectMapper(MsgPackDictionary()))
 print(mapper.read_array(MsgPackParser().parse(buff), cls=XCls))
 
 buff.seek(0)
-mapper = MsgPackObjectMapper(MsgpackCMapperBackend())
+mapper = MsgPackObjectMapper(MsgpackCMapperBackend(msgpackc))
 print(mapper.read_array(MsgPackParser().parse(buff), cls=XCls))
 
 

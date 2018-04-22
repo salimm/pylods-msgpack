@@ -171,8 +171,8 @@ class MsgpackCMapperBackend(ObjectMapperBackend):
     __slots__ = [ '__deserializers']
     
     
-    def __init__(self):
-        super(MsgpackCMapperBackend, self).__init__(MsgPackDictionary()) 
+    def __init__(self,msgpack = msgpackp):
+        super(MsgpackCMapperBackend, self).__init__(MsgPackDictionary(msgpack)) 
         self.__deserializers = {}
 #         events = self.prepare_input(events)
         self.register_module(DecoratorsModule())
