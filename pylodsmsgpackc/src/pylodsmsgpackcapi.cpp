@@ -17,7 +17,6 @@ static PyObject* read_object_msgpack_api(PyObject *self, PyObject *args){
     PyObject* pdict;
     PyObject* deserializers;
     PyObject*  state;
-    std::cout << "++++ read obj msg api 1\n";
     PyObject* pName = PyString_FromString("pylods.deserialize"); // new ref
     PyObject*  pModule = PyImport_Import(pName); // new ref
     Py_DECREF(pName); // dec ref
@@ -68,9 +67,17 @@ static PyObject* read_array_msgpack_api(PyObject *self, PyObject *args){
     Py_DECREF(state);
 
     return result;
+}
 
-    // Py_INCREF(Py_None);
-    // return Py_None;
+
+static PyObject * create_mp_class_event_iterator_api(PyObject *self, PyObject *args){
+    PyObject* events;
+    long int count;
+    PyObject* pdict;
+    if (!PyArg_ParseTuple(args, "OlO", &events, &count, &pdict))  return NULL;
+    Py_INCREF(pdict);
+    MsgpackDictionary* dict = new MsgpackDictionary(pdict);
+    return PYLODSC_CreateClassEventIterator(events,dict, count );
 }
 
 PyMODINIT_FUNC
@@ -83,6 +90,8 @@ initplmsgpackcapi(void){
             "read object"},
         {"read_array",  read_array_msgpack_api, METH_VARARGS,
             "read array"},
+        {"create_ClassEventIterator",  create_mp_class_event_iterator_api, METH_VARARGS,
+            "creates iterator for custom class parsers for msgpack"},
         {NULL, NULL, 0, NULL}        /* Sentinel */
     };
 
