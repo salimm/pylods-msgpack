@@ -11,6 +11,7 @@ from pylods.backend.pylodsp.mapper import PyObjectMapper
 from pylods.decorators import type_attr, order_attr
 import msgpackstream.backend.pyc.stream as msgpackc
 from pylods.deserialize import EventBasedDeserializer
+from pylods.mapper import ObjectMapper
 
 
 gen = MsgPackGenerator()
@@ -47,7 +48,7 @@ class PersonInfoDeserializer(EventBasedDeserializer):
      
     def deserialize(self, events, pdict, ctxt):
         print("xxxx??XxX??")
-        mapper = MsgPackObjectMapper(PyObjectMapper(pdict))
+        mapper = ObjectMapper(pdict.mapper_backend)
         print(mapper.read_obj_property_name(events))        
         firstname = mapper.read_value(events)
 #         print("fn "+firstname)

@@ -21,6 +21,7 @@ from pylods.error import ParseException
 class MsgPackDictionary(Dictionary):
     
     def __init__(self, msgpack = msgpackp):
+        super(MsgPackDictionary, self).__init__()
         self.msgpack = msgpack
         
     
@@ -172,7 +173,9 @@ class MsgpackCMapperBackend(ObjectMapperBackend):
     
     
     def __init__(self,msgpack = msgpackp):
-        super(MsgpackCMapperBackend, self).__init__(MsgPackDictionary(msgpack)) 
+        pdict = MsgPackDictionary(msgpack)
+        pdict.mapper_backend = self
+        super(MsgpackCMapperBackend, self).__init__(pdict) 
         self.__deserializers = {}
         self.register_module(DecoratorsModule())
         
